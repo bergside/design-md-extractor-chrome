@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "DESIGN.md Style Extractor - TypeUI",
   "description": "Extract page styles and generate DESIGN.md or SKILL.md files from a design blueprint based on the TypeUI configuration.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage_url": "https://www.typeui.sh",
   "permissions": [
     "activeTab",

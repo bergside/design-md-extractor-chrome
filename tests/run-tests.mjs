@@ -13,10 +13,10 @@ const mockPayload = {
   totalElements: 460,
   sampledElements: 120,
   typography: [
-    { fontSize: "14px" },
-    { fontSize: "16px" },
-    { fontSize: "16px" },
-    { fontSize: "20px" }
+    { fontFamily: "\"Inter\", \"Helvetica Neue\", Arial, sans-serif", fontSize: "14px", lineHeight: "20px", fontWeight: "400" },
+    { fontFamily: "\"Inter\", \"Helvetica Neue\", Arial, sans-serif", fontSize: "16px", lineHeight: "24px", fontWeight: "400" },
+    { fontFamily: "\"Inter\", \"Helvetica Neue\", Arial, sans-serif", fontSize: "16px", lineHeight: "24px", fontWeight: "400" },
+    { fontFamily: "\"Inter\", \"Helvetica Neue\", Arial, sans-serif", fontSize: "20px", lineHeight: "28px", fontWeight: "600" }
   ],
   colors: [
     { textColor: "rgb(17, 24, 39)", backgroundColor: "rgb(255, 255, 255)", borderColor: "rgb(229, 231, 235)", outlineColor: "rgb(59, 130, 246)" },
@@ -80,6 +80,7 @@ const mockPayload = {
 const normalized = normalizeExtractedStyles(mockPayload);
 
 assert.ok(normalized.typographyScale.length >= 3, "typography scale should be inferred");
+assert.equal(normalized.mainFontStyle.primaryFamily, "Inter", "main font family should be inferred");
 assert.ok(normalized.colorPalette.length >= 3, "color palette should be inferred");
 assert.ok(normalized.spacingScale.length >= 2, "spacing scale should be inferred");
 
@@ -107,7 +108,9 @@ assert.ok(skillValidation.isValid, `SKILL.md should be valid: ${skillValidation.
 assert.ok(skillMd.includes("TYPEUI_SH_MANAGED_START"), "SKILL.md should include managed markers");
 assert.ok(designMd.includes("WCAG 2.2 AA"), "DESIGN.md should include accessibility target");
 assert.ok(designMd.includes("- URL: https://example.com/dashboard"), "DESIGN.md should include extraction URL");
+assert.ok(designMd.includes("- Main font style: `font.family.primary=Inter`"), "DESIGN.md should include inferred main font style");
 assert.ok(skillMd.includes("- URL: https://example.com/dashboard"), "SKILL.md should include extraction URL");
+assert.ok(skillMd.includes("- Main font style: `font.family.primary=Inter`"), "SKILL.md should include inferred main font style");
 assert.ok(designMd.includes("- Audience: authenticated users and operators"), "DESIGN.md should infer audience from site signals");
 assert.ok(designMd.includes("- Product surface: dashboard web app"), "DESIGN.md should infer product surface from site signals");
 assert.ok(skillMd.includes("- Product surface: dashboard web app"), "SKILL.md should infer product surface from site signals");
